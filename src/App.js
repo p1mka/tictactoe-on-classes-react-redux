@@ -15,6 +15,7 @@ export default function App() {
 
   const currentSquares = moves[currentMove];
   const xIsNext = currentMove % 2 === 0;
+  console.log(xIsNext);
 
   function handlePlay(nextSquares) {
     const nextMove = [...moves.slice(0, currentMove + 1), nextSquares];
@@ -30,7 +31,7 @@ export default function App() {
         squares={currentSquares}
         onPlay={handlePlay}
       />
-      <Restart setIsUpdate={setIsUpdate} />
+      <Restart setIsUpdate={setIsUpdate} isUpdate={isUpdate} />
     </div>
   );
 }
