@@ -1,10 +1,11 @@
 import styles from "./restart.module.css";
-import { store } from "../store";
+import { useDispatch } from "react-redux";
+import { RESTART } from "../actions";
 
-export function Restart({ setIsUpdate, isUpdate }) {
+export function Restart() {
+  const dispatch = useDispatch();
   const onRestartClick = () => {
-    store.dispatch({ type: "RESTART" });
-    setIsUpdate(!isUpdate);
+    dispatch(RESTART);
   };
   return (
     <div>

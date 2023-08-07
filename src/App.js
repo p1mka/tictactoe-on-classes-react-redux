@@ -1,27 +1,21 @@
-import { useState, useEffect } from "react";
 import styles from "./App.module.css";
 import { Playground, Restart } from "./components";
-import { store } from "./store";
+import { useDispatch, useSelector } from "react-redux";
+import { selectMoves, selectCurrentMove } from "./selectors";
+import { setMoves, setCurrentMove } from "./actions";
 
 export default function App() {
-  const [isUpdate, setIsUpdate] = useState(false);
-  const { moves, currentMove } = store.getState();
-
-  useEffect(() => {
-    return () => {
-      store.getState();
-    };
-  }, [isUpdate]);
+  const moves = useSelector(selectMoves);
+  const currentMove = useSelector(selectCurrentMove);
+  const dispatch = useDispatch();
 
   const currentSquares = moves[currentMove];
   const xIsNext = currentMove % 2 === 0;
-  console.log(xIsNext);
 
   function handlePlay(nextSquares) {
     const nextMove = [...moves.slice(0, currentMove + 1), nextSquares];
-    store.dispatch({ type: "SET_MOVES", payload: nextMove });
-    store.dispatch({ type: "SET_CURRENT_MOVE", payload: nextMove.length - 1 });
-    setIsUpdate(!isUpdate);
+    dispatch(setMoves(nextMove));
+    dispatch(setCurrentMove(nextMove));
   }
 
   return (
@@ -31,7 +25,7 @@ export default function App() {
         squares={currentSquares}
         onPlay={handlePlay}
       />
-      <Restart setIsUpdate={setIsUpdate} isUpdate={isUpdate} />
+      <Restart />
     </div>
   );
 }
