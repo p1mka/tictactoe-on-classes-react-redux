@@ -1,17 +1,29 @@
-import styles from "./restart.module.css";
-import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { RESTART } from "../actions";
+import { Component } from "react";
 
-export function Restart() {
-  const dispatch = useDispatch();
-  const onRestartClick = () => {
-    dispatch(RESTART);
-  };
-  return (
-    <div>
-      <button className={styles.restart} onClick={onRestartClick}>
-        Начать заново
-      </button>
-    </div>
-  );
+export class RestartContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.onRestartClick = this.onRestartClick.bind(this);
+  }
+
+  onRestartClick() {
+    this.props.dispatch(RESTART);
+  }
+
+  render() {
+    return (
+      <div>
+        <button
+          className="w-full h-12 text-center cursor-pointer "
+          onClick={this.onRestartClick}
+        >
+          Начать заново
+        </button>
+      </div>
+    );
+  }
 }
+
+export const Restart = connect()(RestartContainer);

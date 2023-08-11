@@ -1,5 +1,5 @@
-export const setMoves = (nextMove) => ({
-  type: "SET_MOVES",
+export const setSquares = (nextMove) => ({
+  type: "SET_SQUARES",
   payload: nextMove,
 });
 export const setCurrentMove = (nextMove) => ({
@@ -9,3 +9,7 @@ export const setCurrentMove = (nextMove) => ({
 export const RESTART = {
   type: "RESTART",
 };
+export const setXIsNext = (xIsNext) => ({
+  type: "SET_X_IS_NEXT",
+  payload: !xIsNext,
+});
